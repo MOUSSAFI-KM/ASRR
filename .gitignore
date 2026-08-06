@@ -1,0 +1,23 @@
+# IntelliJ
+.idea/
+
+# VS Code
+.vscode/
+
+# Java
+*.class
+build/
+out/
+
+# Gradle
+.gradle/
+
+# Node
+node_modules/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
