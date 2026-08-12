@@ -1,6 +1,6 @@
-package backend.hello.service;
+package main.java.backend.hello.service;
 
-import backend.hello.dto.HelloResponse;
+import main.java.backend.hello.dto.HelloResponse;
 import org.springframework.stereotype.Service;
 
 @Service
