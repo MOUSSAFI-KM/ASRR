@@ -1,0 +1,289 @@
+:host {
+  display: block;
+}
+
+
+/* =================================
+   APP SHELL
+================================= */
+
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f7f9;
+}
+
+
+/* =================================
+   SIDEBAR
+================================= */
+
+.sidebar {
+  width: 245px;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #2c1c32;
+  color: #ffffff;
+
+  flex-shrink: 0;
+}
+
+
+/* =================================
+   BRAND
+================================= */
+
+.brand {
+  height: 76px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 22px;
+
+  border-bottom: 1px solid #35414d;
+}
+
+.brand-icon {
+  width: 69px;
+  height: 69px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-right: 11px;
+
+  border-radius: 8px;
+
+  background: #526b82;
+
+  font-size: 18px;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-text strong {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.brand-text span {
+  margin-top: 2px;
+
+  font-size: 11px;
+
+  color: #aeb8c2;
+}
+
+
+/* =================================
+   NAVIGATION
+================================= */
+
+.navigation {
+  flex: 1;
+
+  padding: 22px 12px;
+}
+
+.navigation-section {
+  margin: 20px 11px 8px;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  letter-spacing: 1px;
+
+  color: #8996a3;
+}
+
+.navigation-section:first-child {
+  margin-top: 0;
+}
+
+
+.navigation-item {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 10px 12px;
+
+  margin-bottom: 3px;
+
+  border-radius: 6px;
+
+  color: #c5cdd5;
+
+  text-decoration: none;
+
+  font-size: 13px;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.navigation-item:hover {
+  background: #2b3742;
+  color: #ffffff;
+}
+
+.navigation-item.active {
+  background: #526b82;
+  color: #ffffff;
+}
+
+.navigation-icon {
+  width: 20px;
+
+  text-align: center;
+
+  font-size: 15px;
+}
+
+
+/* =================================
+   SIDEBAR FOOTER
+================================= */
+
+.sidebar-footer {
+  padding: 18px;
+
+  border-top: 1px solid #35414d;
+}
+
+.system-status {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #57ad79;
+}
+
+.system-status strong {
+  display: block;
+
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.system-status small {
+  display: block;
+
+  margin-top: 2px;
+
+  font-size: 10px;
+
+  color: #8996a3;
+}
+
+
+/* =================================
+   MAIN AREA
+================================= */
+
+.main-area {
+  flex: 1;
+
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* =================================
+   TOPBAR
+================================= */
+
+.topbar {
+  height: 76px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 32px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #e3e7eb;
+}
+
+.topbar-title {
+  font-size: 14px;
+  font-weight: 600;
+
+  color: #354052;
+}
+
+.topbar-user {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.user-avatar {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #e7ebef;
+
+  color: #526b82;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.user-info strong {
+  display: block;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  color: #354052;
+}
+
+.user-info span {
+  display: block;
+
+  margin-top: 2px;
+
+  font-size: 10px;
+
+  color: #8996a3;
+}
+
+
+/* =================================
+   CONTENT
+================================= */
+
+.content {
+  flex: 1;
+
+  overflow-y: auto;
+}

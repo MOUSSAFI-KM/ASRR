@@ -1,0 +1,188 @@
+<div class="page">
+
+  <div class="page-header">
+
+    <div>
+      <div class="breadcrumb">
+        Operations / Airports
+      </div>
+
+      <h1>Airports</h1>
+
+      <p>
+        Manage and monitor airports registered in the safety system.
+      </p>
+    </div>
+
+    <button
+      class="primary-button"
+      routerLink="/airports/new">
+      + Add Airport
+    </button>
+
+  </div>
+
+
+  <!-- Statistics -->
+
+  @if (airports$ | async; as airports) {
+
+    <div class="statistics">
+
+      <div class="stat-card">
+        <span>Total Airports</span>
+        <strong>{{ airports.length }}</strong>
+      </div>
+
+      <div class="stat-card">
+        <span>Active</span>
+
+        <strong>
+          {{
+            airports.filter(
+              airport => airport.status === 'ACTIVE'
+            ).length
+          }}
+        </strong>
+      </div>
+
+      <div class="stat-card">
+        <span>Inactive</span>
+
+        <strong>
+          {{
+            airports.filter(
+              airport => airport.status !== 'ACTIVE'
+            ).length
+          }}
+        </strong>
+      </div>
+
+    </div>
+
+
+    <!-- Airport table -->
+
+    <div class="table-container">
+
+      <div class="table-header">
+
+        <div>
+          <h2>Registered Airports</h2>
+          <span>{{ airports.length }} airports</span>
+        </div>
+
+        <input
+          type="text"
+          placeholder="Search airport..."
+        >
+
+      </div>
+
+
+      @if (airports.length === 0) {
+
+        <div class="empty-state">
+          <h3>No airports found</h3>
+          <p>
+            Start by registering your first airport.
+          </p>
+
+          <button
+            class="primary-button"
+            routerLink="/airports/new">
+            Add Airport
+          </button>
+        </div>
+
+      } @else {
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>ICAO</th>
+              <th>IATA</th>
+              <th>Airport</th>
+              <th>Location</th>
+              <th>Elevation</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            @for (airport of airports; track airport.id) {
+
+              <tr>
+
+                <td>
+                  <strong>{{ airport.icaoCode }}</strong>
+                </td>
+
+                <td>
+                  {{ airport.iataCode }}
+                </td>
+
+                <td>
+                  <div class="airport-name">
+                    {{ airport.name }}
+                  </div>
+                </td>
+
+                <td>
+                  <div>
+                    {{ airport.city }}
+                  </div>
+
+                  <small>
+                    {{ airport.country }}
+                  </small>
+                </td>
+
+                <td>
+                  {{ airport.elevation }} m
+                </td>
+
+                <td>
+
+                  <span
+                    class="status"
+                    [class.active]="airport.status === 'ACTIVE'">
+
+                    <span class="status-dot"></span>
+
+                    {{ airport.status }}
+
+                  </span>
+
+                </td>
+
+                <td>
+                  <button class="action-button">
+                    ⋮
+                  </button>
+                </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      }
+
+    </div>
+
+  } @else {
+
+    <div class="loading">
+      Loading airports...
+    </div>
+
+  }
+
+</div>

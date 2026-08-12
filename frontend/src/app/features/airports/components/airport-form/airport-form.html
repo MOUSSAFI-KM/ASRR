@@ -1,0 +1,368 @@
+<div class="page">
+
+  <!-- Page header -->
+  <div class="page-header">
+
+    <div>
+      <div class="breadcrumb">
+        Operations / Airports / New Airport
+      </div>
+
+      <h1>Register Airport</h1>
+
+      <p>
+        Add a new airport to the operational database.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- Form -->
+  <form
+    [formGroup]="airportForm"
+    (ngSubmit)="onSubmit()"
+    class="airport-form">
+
+
+    <!-- General information -->
+
+    <section class="form-card">
+
+      <div class="section-header">
+
+        <div>
+          <h2>General Information</h2>
+
+          <p>
+            Basic identification and operational information.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="form-grid">
+
+        <!-- Airport name -->
+
+        <div class="form-field form-field-large">
+
+          <label for="name">
+            Airport Name
+            <span>*</span>
+          </label>
+
+          <input
+            id="name"
+            type="text"
+            formControlName="name"
+            placeholder="e.g. Marrakech Menara Airport"
+          >
+
+          @if (
+            airportForm.controls.name.touched &&
+            airportForm.controls.name.invalid
+          ) {
+            <small class="error">
+              Airport name is required.
+            </small>
+          }
+
+        </div>
+
+
+        <!-- ICAO -->
+
+        <div class="form-field">
+
+          <label for="icaoCode">
+            ICAO Code
+            <span>*</span>
+          </label>
+
+          <input
+            id="icaoCode"
+            type="text"
+            formControlName="icaoCode"
+            placeholder="GMMX"
+            maxlength="4"
+          >
+
+          @if (
+            airportForm.controls.icaoCode.touched &&
+            airportForm.controls.icaoCode.invalid
+          ) {
+            <small class="error">
+              ICAO code must contain exactly 4 characters.
+            </small>
+          }
+
+        </div>
+
+
+        <!-- IATA -->
+
+        <div class="form-field">
+
+          <label for="iataCode">
+            IATA Code
+            <span>*</span>
+          </label>
+
+          <input
+            id="iataCode"
+            type="text"
+            formControlName="iataCode"
+            placeholder="RAK"
+            maxlength="3"
+          >
+
+          @if (
+            airportForm.controls.iataCode.touched &&
+            airportForm.controls.iataCode.invalid
+          ) {
+            <small class="error">
+              IATA code must contain exactly 3 characters.
+            </small>
+          }
+
+        </div>
+
+
+        <!-- Status -->
+
+        <div class="form-field">
+
+          <label for="status">
+            Operational Status
+            <span>*</span>
+          </label>
+
+          <select
+            id="status"
+            formControlName="status"
+          >
+
+            <option value="ACTIVE">
+              Active
+            </option>
+
+            <option value="INACTIVE">
+              Inactive
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Location -->
+
+    <section class="form-card">
+
+      <div class="section-header">
+
+        <div>
+          <h2>Location</h2>
+
+          <p>
+            Geographic information used by the safety system.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="form-grid">
+
+
+        <!-- Country -->
+
+        <div class="form-field">
+
+          <label for="country">
+            Country
+            <span>*</span>
+          </label>
+
+          <input
+            id="country"
+            type="text"
+            formControlName="country"
+            placeholder="Morocco"
+          >
+
+        </div>
+
+
+        <!-- City -->
+
+        <div class="form-field">
+
+          <label for="city">
+            City
+            <span>*</span>
+          </label>
+
+          <input
+            id="city"
+            type="text"
+            formControlName="city"
+            placeholder="Marrakech"
+          >
+
+        </div>
+
+
+        <!-- Latitude -->
+
+        <div class="form-field">
+
+          <label for="latitude">
+            Latitude
+          </label>
+
+          <div class="input-with-unit">
+
+            <input
+              id="latitude"
+              type="number"
+              formControlName="latitude"
+              step="any"
+              placeholder="31.6069"
+            >
+
+            <span>°</span>
+
+          </div>
+
+          @if (
+            airportForm.controls.latitude.touched &&
+            airportForm.controls.latitude.invalid
+          ) {
+            <small class="error">
+              Latitude must be between -90° and 90°.
+            </small>
+          }
+
+        </div>
+
+
+        <!-- Longitude -->
+
+        <div class="form-field">
+
+          <label for="longitude">
+            Longitude
+          </label>
+
+          <div class="input-with-unit">
+
+            <input
+              id="longitude"
+              type="number"
+              formControlName="longitude"
+              step="any"
+              placeholder="-8.0363"
+            >
+
+            <span>°</span>
+
+          </div>
+
+          @if (
+            airportForm.controls.longitude.touched &&
+            airportForm.controls.longitude.invalid
+          ) {
+            <small class="error">
+              Longitude must be between -180° and 180°.
+            </small>
+          }
+
+        </div>
+
+
+        <!-- Elevation -->
+
+        <div class="form-field">
+
+          <label for="elevation">
+            Elevation
+          </label>
+
+          <div class="input-with-unit">
+
+            <input
+              id="elevation"
+              type="number"
+              formControlName="elevation"
+              step="any"
+              placeholder="471"
+            >
+
+            <span>m</span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Messages -->
+
+    @if (successMessage) {
+
+      <div class="success-message">
+        ✓ {{ successMessage }}
+      </div>
+
+    }
+
+    @if (errorMessage) {
+
+      <div class="error-message">
+        ⚠ {{ errorMessage }}
+      </div>
+
+    }
+
+
+    <!-- Actions -->
+
+    <div class="form-actions">
+
+      <button
+        type="button"
+        class="secondary-button"
+        routerLink="/airports"
+      >
+        Cancel
+      </button>
+
+      <button
+        type="submit"
+        class="primary-button"
+        [disabled]="isSubmitting"
+      >
+
+        @if (isSubmitting) {
+          Creating...
+        } @else {
+          Create Airport
+        }
+
+      </button>
+
+    </div>
+
+  </form>
+
+</div>

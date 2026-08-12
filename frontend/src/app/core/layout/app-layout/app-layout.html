@@ -1,0 +1,89 @@
+<div class="app-shell">
+  <!--========================
+        SIDEBAR
+    ========================== -->
+  <aside class="sidebar">
+    <!-- Brand -->
+    <div class="brand">
+      <img src="assets/images/onda-logo.png" alt="ONDA" class="brand-icon" />
+
+      <div class="brand-text">
+        <strong>Airport</strong>
+        <span>Safety Register</span>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+
+    <nav class="navigation">
+      <div class="navigation-section">OPERATIONS</div>
+
+      <a routerLink="/dashboard" routerLinkActive="active" class="navigation-item">
+        <span class="navigation-icon">▦</span>
+        <span>Dashboard</span>
+      </a>
+
+      <a routerLink="/airports" routerLinkActive="active" class="navigation-item">
+        <span class="navigation-icon"> ✈ </span>
+
+        <span> Airports </span>
+      </a>
+      <div class="navigation-section">SAFETY</div>
+      <a routerLink="/risks" routerLinkActive="active" class="navigation-item">
+        <span class="navigation-icon"> ⚠ </span>
+        <span> Risk Register </span>
+      </a>
+      <a routerLink="/inspections" routerLinkActive="active" class="navigation-item">
+        <span class="navigation-icon"> ✓ </span>
+
+        <span> Inspections </span>
+      </a>
+
+      <div class="navigation-section">REPORTING</div>
+
+      <a routerLink="/reports" routerLinkActive="active" class="navigation-item">
+        <span class="navigation-icon"> ▤ </span>
+
+        <span> Reports </span>
+      </a>
+    </nav>
+    <!-- Sidebar footer -->
+
+    <div class="sidebar-footer">
+      <div class="system-status">
+        <span class="status-indicator"></span>
+
+        <div>
+          <strong>System operational</strong>
+          <small>All services running</small>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <!-- ======================
+       MAIN AREA
+    ========================= -->
+
+  <div class="main-area">
+    <!-- Top bar -->
+
+    <header class="topbar">
+      <div class="topbar-title">Airport Safety Management</div>
+
+      <div class="topbar-user">
+        <div class="user-avatar">KDM</div>
+
+        <div class="user-info">
+          <strong>Operator</strong>
+          <span>Safety Management</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page content -->
+
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
