@@ -6,6 +6,7 @@ import backend.airport.dto.AirportResponse;
 import backend.airport.entity.Airport;
 import backend.airport.mapper.AirportMapper;
 import backend.airport.repository.AirportRepository;
+import backend.exception.ResourceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -66,4 +67,36 @@ public class AirportServiceImpl implements AirportService{
 
         airportRepository.deleteById(id);
     }
+
+    @Override
+    public AirportResponse updateAirport(UUID id, AirportRequest request) {
+        Airport airport = airportRepository
+                .findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Airport not found with id: " + id
+                        )
+                );
+
+        airportMapper.updateEntity(request, airport);
+
+        Airport updatedAirport =
+                airportRepository.save(airport);
+
+        return airportMapper.toResponse(updatedAirport);
+    }
+
+    @Override
+    public List<AirportResponse> searchAirports(String search) {
+
+        if (search == null || search.isBlank()) {
+            return getAllAirports();
+        }
+        return airportRepository
+                .search(search.trim())
+                .stream()
+                .map(airportMapper::toResponse)
+                .toList();
+    }
+
 }

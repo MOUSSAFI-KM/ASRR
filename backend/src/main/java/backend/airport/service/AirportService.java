@@ -16,5 +16,8 @@ public interface AirportService {
 
     List<AirportResponse > getAllAirports();
 
+    List<AirportResponse> searchAirports(String search);
+
     void deleteAirport(UUID id);
+    public AirportResponse updateAirport(UUID id, AirportRequest request);
 }
