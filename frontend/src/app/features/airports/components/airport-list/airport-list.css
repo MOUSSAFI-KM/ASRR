@@ -160,3 +160,10 @@ td small {
   padding: 60px;
   text-align: center;
 }
+
+.edit-button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 12px;
+}

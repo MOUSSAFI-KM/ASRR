@@ -353,11 +353,7 @@
         [disabled]="isSubmitting"
       >
 
-        @if (isSubmitting) {
-          Creating...
-        } @else {
-          Create Airport
-        }
+        {{ airportId ? 'Update Airport' : 'Create Airport' }}
 
       </button>
 
