@@ -1,12 +1,13 @@
-import { Component, inject } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import {
   FormBuilder,
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 
 import { AirportService } from '../../services/airport.service';
+import { AirportRequest } from '../../models/airport-request.model';
 
 @Component({
   selector: 'app-airport-form',
@@ -23,6 +24,7 @@ export class AirportForm {
   private readonly formBuilder = inject(FormBuilder);
   private readonly airportService = inject(AirportService);
   private readonly router = inject(Router);
+  private readonly activatedRoute = inject(ActivatedRoute);
   readonly airportForm = this.formBuilder.nonNullable.group({
 
     icaoCode: [
@@ -94,52 +96,103 @@ export class AirportForm {
 
   errorMessage = '';
 
+  airportId: string | null = null;
 
-  onSubmit(): void {
+  ngOnInit(): void {
+    //detect edit mode
+    this.airportId = this.activatedRoute.snapshot.paramMap.get('id');
 
-    this.successMessage = '';
-    this.errorMessage = '';
-
-    if (this.airportForm.invalid) {
-
-      this.airportForm.markAllAsTouched();
-
-      return;
+    if(this.airportId){
+        this.loadAirport(this.airportId);
     }
 
-    this.isSubmitting = true;
+  }
 
-    const request = this.airportForm.getRawValue();
-
+  loadAirport(id: string): void {
     
-    this.airportService.createAirport(request).subscribe({
-
+    this.airportService.getAirportById(id).subscribe(
+    {
       next: (airport) => {
+        this.airportForm.patchValue(airport);
+      },
 
-        console.log('Airport created:', airport);
+      error: (error) => {
+        console.error(
+        'Error loading airport: ',
+        error
+        )
+      }
+    }
+    );
+  }
+
+onSubmit(): void {
+
+  if (this.airportForm.invalid) {
+    this.airportForm.markAllAsTouched();
+    return;
+  }
+
+  const airportRequest: AirportRequest =
+    this.airportForm.getRawValue();
+
+  // EDIT MODE
+  if (this.airportId) {
+
+    this.airportService
+      .updateAirport(
+        this.airportId,
+        airportRequest
+      )
+      .subscribe({
+
+        next: () => {
+
+          console.log(
+            'Airport updated successfully'
+          );
+
+          this.router.navigate(['/airports']);
+        },
+
+        error: (error) => {
+
+          console.error(
+            'Error updating airport:',
+            error
+          );
+
+        }
+
+      });
+
+    return;
+  }
+
+  // CREATE MODE
+  this.airportService
+    .createAirport(airportRequest)
+    .subscribe({
+
+      next: () => {
+
+        console.log(
+          'Airport created successfully'
+        );
 
         this.router.navigate(['/airports']);
-
-        this.isSubmitting = false;
-
       },
 
       error: (error) => {
 
         console.error(
-          'Error while creating airport:',
+          'Error creating airport:',
           error
         );
-
-        this.errorMessage =
-          'Unable to create the airport. Please try again.';
-
-        this.isSubmitting = false;
 
       }
 
     });
-
-  }
+}
 
 }

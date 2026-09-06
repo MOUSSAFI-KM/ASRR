@@ -24,8 +24,15 @@ export const routes: Routes = [
           import(
             './features/airports/components/airport-form/airport-form'
           ).then(m => m.AirportForm)
+      }
+      ,
+      {
+        path: 'airports/:id/edit',
+        loadComponent: () => 
+          import(
+            './features/airports/components/airport-form/airport-form'
+          ).then(m => m.AirportForm)
       },
-
       {
         path: '',
         redirectTo: 'airports',

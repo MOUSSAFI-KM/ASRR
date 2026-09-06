@@ -1,34 +1,20 @@
 <div class="page">
-
   <div class="page-header">
-
     <div>
-      <div class="breadcrumb">
-        Operations / Airports
-      </div>
+      <div class="breadcrumb">Operations / Airports</div>
 
       <h1>Airports</h1>
 
-      <p>
-        Manage and monitor airports registered in the safety system.
-      </p>
+      <p>Manage and monitor airports registered in the safety system.</p>
     </div>
 
-    <button
-      class="primary-button"
-      routerLink="/airports/new">
-      + Add Airport
-    </button>
-
+    <button class="primary-button" routerLink="/airports/new">+ Add Airport</button>
   </div>
-
 
   <!-- Statistics -->
 
   @if (airports$ | async; as airports) {
-
     <div class="statistics">
-
       <div class="stat-card">
         <span>Total Airports</span>
         <strong>{{ airports.length }}</strong>
@@ -57,48 +43,50 @@
           }}
         </strong>
       </div>
-
     </div>
-
 
     <!-- Airport table -->
 
     <div class="table-container">
-
       <div class="table-header">
-
         <div>
           <h2>Registered Airports</h2>
           <span>{{ airports.length }} airports</span>
         </div>
 
-        <input
-          type="text"
-          placeholder="Search airport..."
-        >
+        <!-- <div class="search-container"> -->
 
+  <input
+    type="text"
+    [(ngModel)]="searchTerm"
+    placeholder="Search by ICAO, IATA, name or city..."
+    (keyup.enter)="searchAirports()"
+  />
+
+  <!-- <button
+    type="button"
+    (click)="searchAirports()">
+    Search
+  </button>
+
+  <button
+    type="button"
+    (click)="searchTerm = ''; loadAirports()">
+    Clear
+  </button>
+
+</div> -->
       </div>
 
-
       @if (airports.length === 0) {
-
         <div class="empty-state">
           <h3>No airports found</h3>
-          <p>
-            Start by registering your first airport.
-          </p>
+          <p>Start by registering your first airport.</p>
 
-          <button
-            class="primary-button"
-            routerLink="/airports/new">
-            Add Airport
-          </button>
+          <button class="primary-button" routerLink="/airports/new">Add Airport</button>
         </div>
-
       } @else {
-
         <table>
-
           <thead>
             <tr>
               <th>ICAO</th>
@@ -112,11 +100,8 @@
           </thead>
 
           <tbody>
-
             @for (airport of airports; track airport.id) {
-
               <tr>
-
                 <td>
                   <strong>{{ airport.icaoCode }}</strong>
                 </td>
@@ -141,48 +126,38 @@
                   </small>
                 </td>
 
-                <td>
-                  {{ airport.elevation }} m
-                </td>
+                <td>{{ airport.elevation }} m</td>
 
                 <td>
-
-                  <span
-                    class="status"
-                    [class.active]="airport.status === 'ACTIVE'">
-
+                  <span class="status" [class.active]="airport.status === 'ACTIVE'">
                     <span class="status-dot"></span>
 
                     {{ airport.status }}
-
                   </span>
-
                 </td>
 
                 <td>
-                  <button class="action-button">
-                    ⋮
+                  <button
+                    class="action-button delete"
+                    title="Edit airoprt"
+                    type="button"
+                    (click)="editAirport(airport.id)">
+                    ✏️
                   </button>
                 </td>
-
+                <td>
+                  <button class="action-button delete" 
+                  title="Delete airport"
+                  (click)="deleteAirport(airport.id)">
+                  🗑️</button>
+                </td>
               </tr>
-
             }
-
           </tbody>
-
         </table>
-
       }
-
     </div>
-
   } @else {
-
-    <div class="loading">
-      Loading airports...
-    </div>
-
+    <div class="loading">Loading airports...</div>
   }
-
 </div>
