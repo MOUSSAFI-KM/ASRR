@@ -1,8 +1,8 @@
-# Test Project
+# Airport Safety Risk Register (ASRR) Project
 
 ## Description
 
-Playground project to refresh my Software Engineering skills.
+Le projet ASRR vise à développer une plateforme web moderne permettant la gestion des risques sécurité dans un aéroport selon les principes du Safety Management System (SMS) de l'OACI. L'application servira à la fois de projet pédagogique avancé et de démonstrateur professionnel.
 
 ## Tech Stack
 
