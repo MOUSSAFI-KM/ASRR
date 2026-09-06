@@ -36,11 +36,10 @@ public class AirportController {
     }
 
     @GetMapping
-    public ResponseEntity<List<AirportResponse >> getAllAirports() {
-
-        return ResponseEntity.ok(
-                airportService.getAllAirports()
-        );
+    public List<AirportResponse> getAirports(
+            @RequestParam(required = false) String search
+    ) {
+        return airportService.searchAirports(search);
     }
 
     @GetMapping("/{id}")
@@ -68,5 +67,13 @@ public class AirportController {
         airportService.deleteAirport(id);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public AirportResponse updateAirport(
+            @PathVariable UUID id,
+            @Valid @RequestBody AirportRequest request
+    ) {
+        return airportService.updateAirport(id, request);
     }
 }
